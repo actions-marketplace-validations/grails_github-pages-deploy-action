@@ -1,3 +1,7 @@
+# Used By
+
+https://github.com/search?q=org%3Agrails+%22uses%3A+grails%2Fgithub-pages-deploy-action%22+language%3Ayml&type=code
+
 # GitHub Pages Deploy Action :rocket: 
 
 [![Actions Status](https://github.com/grails/github-pages-deploy-action/workflows/integration/badge.svg)](https://github.com/grails/github-pages-deploy-action/actions) [![View Action](https://img.shields.io/badge/view-action-blue.svg)](https://github.com/marketplace/actions/deploy-to-github-pages) [![Issues](https://img.shields.io/github/issues/JamesIves/github-pages-deploy-action.svg)](https://github.com/grails/github-pages-deploy-action/issues)
@@ -60,3 +64,25 @@ Below you'll find a description of what each option does.
 With the action correctly configured you should see the workflow trigger the deployment under the configured conditions.
 
 ![Example](screenshot.png)
+
+## Releasing a new version
+
+To release a new version, you need to create a new tag with the version number (prefixed with v). This can be done via
+the GitHub Releases page or via the command line.
+```console
+git tag v3.0
+git push origin v3.0
+```
+
+To make major version references work, create a new branch with the major version number (if it does not already exist).
+```console
+git checkout -b v3 v3.0
+git push origin v3
+```
+
+When a new minor version is released, update the major version branch to point to the new release tag.
+```console
+git checkout v3
+git reset --hard v3.1
+git push --force origin v3
+```
